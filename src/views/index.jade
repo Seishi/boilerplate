@@ -1,0 +1,14 @@
+---
+pageTitle: Index
+---
+
+extend _layout
+
+block content
+  h1
+    | You're in #{__DEV__?'development':'production'} mode.
+    span.test Baby
+    | !
+
+block scripts
+  script(src="#{current.base}/assets/bundle.js")
