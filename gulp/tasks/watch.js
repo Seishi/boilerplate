@@ -1,14 +1,20 @@
-// Watch files
+// Watch files' changes
 // ------------------------------
 
-export default function (gulp, $, config) {
-  gulp.task('watch', ['serve'], () => {
-    $.watch(config.lint, () => {
-      gulp.start('lint');
-    });
+// import browserSync from 'browser-sync';
+
+export default function (gulp, config, $) {
+  gulp.task('watch', () => {
+
+    if (config.lint.enable) {
+      $.watch(config.lint.files, () => {
+        gulp.start('lint');
+      });
+    }
 
     $.watch(config.markup.src, () => {
       gulp.start('markup');
     });
+
   });
 }

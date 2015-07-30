@@ -1,5 +1,5 @@
 import './Example.styl';
-import Test from '../Test/Test';
+import Loading from '../Loading/Loading';
 
 class Example {
   run () {
@@ -10,8 +10,8 @@ class Example {
     document.querySelector('.test')
       .innerHTML = 'Buddy';
 
-    const test = new Test();
-    test.run();
+    const loading = new Loading();
+    loading.run();
   }
 }
 

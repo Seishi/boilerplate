@@ -3,8 +3,8 @@
 
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
-import minimist from 'minimist';
 
+// Configurations
 import config from './gulp/config';
 
 // Import tasks
@@ -12,29 +12,28 @@ import taskLint from './gulp/tasks/lint';
 import taskWatch from './gulp/tasks/watch';
 import taskDefault from './gulp/tasks/default';
 import taskServe from './gulp/tasks/serve';
+import taskBrowserSync from './gulp/tasks/browser-sync';
 import taskClean from './gulp/tasks/clean';
 import taskBundle from './gulp/tasks/bundle';
 import taskMarkup from './gulp/tasks/markup';
 
 const $ = gulpLoadPlugins();
 
-// Get arguments from command line
-const argv = minimist(process.argv.slice(2));
-
-
 // Tasks
 // ------------------------------
 
-taskServe(gulp);
+taskClean(gulp, config);
 
-taskClean(gulp);
+taskLint(gulp, config, $);
 
-taskLint(gulp, $, config);
+taskMarkup(gulp, config, $);
 
-taskWatch(gulp, $, config);
+taskBundle(gulp, config, $);
 
-taskMarkup(gulp, $, config, argv);
+taskServe(gulp, config, $);
 
-taskBundle(gulp, $, argv);
+taskBrowserSync(gulp, config);
 
-taskDefault(gulp, $, argv);
+taskWatch(gulp, config, $);
+
+taskDefault(gulp, config, $);

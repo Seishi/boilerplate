@@ -1,4 +1,7 @@
+# Node
 node_modules/
 
+# Generated files
 dist/
 dist
+public/

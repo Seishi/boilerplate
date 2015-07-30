@@ -3,8 +3,8 @@
 
 import rimraf from 'rimraf';
 
-export default function (gulp) {
+export default function (gulp, config) {
   return gulp.task('clean', function(cb) {
-    rimraf('./dist', cb);
+    rimraf(config.markup.dest, cb);
   });
 }

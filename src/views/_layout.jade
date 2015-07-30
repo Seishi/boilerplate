@@ -3,6 +3,9 @@ html
   head
     meta(charset="UTF-8")
     title= pageTitle + " - " + siteName
+    if !__DEV__ && stylesheets
+      each stylesheet in stylesheets
+        link(rel="stylesheet", type="text/css", href="#{current.base}assets/#{stylesheet}.css")
   body
     block content
 
