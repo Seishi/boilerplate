@@ -15,8 +15,8 @@ const argv = minimist(process.argv.slice(2));
 // Switch environments between development and production
 const DEBUG = !argv.release;
 
-// We use sourcemaps in development while we minimize the code in production
-const CSS_LOADER = DEBUG ? 'css-loader?sourceMap' : 'css-loader?minimize';
+// We use sourcemaps in development
+const CSS_LOADER = DEBUG ? 'css-loader?sourceMap' : 'css-loader?-minimize';
 
 // Browers Autoprefixer should take care of
 const AUTOPREFIXER_BROWSERS = [
@@ -30,8 +30,11 @@ const AUTOPREFIXER_BROWSERS = [
   'Safari >= 6'
 ];
 
-// Seperate CSS into files or not
+// Whether to seperate CSS into files or not
 const EXTRACT_CSS = true;
+
+// Convert into base64 if the image size is less than 5k
+const BASE64_LIMIT = 5120;
 
 // Global variables for debugging scripts
 // Such code like `if(__DEV__) { ... } ` will be removed in production
@@ -51,6 +54,7 @@ const TEMPLATE_GLOBALS = {
 // ------------------------------
 
 const dirs = {
+  src: 'src',
   pub: 'public',
   dist: 'dist',
   assets: 'assets'
@@ -71,8 +75,12 @@ const config = {
       'gulpfile.babel.js',
       'webpack.config.js',
       './gulp/**/*.js',
-      './src/**/*.js'
+      `./${dirs.src}/**/*.js`
     ]
+  },
+
+  scripts: {
+    src: [`./${dirs.src}/**/*.js`]
   },
 
   browserSync: {
@@ -83,12 +91,18 @@ const config = {
 
   markup: {
     src: [
-      './src/views/**/*.jade',
+      `./${dirs.src}/views/**/*.jade`,
       '!**/_*.jade'
     ],
     dest: DEBUG ? `./${dirs.pub}` : `./${dirs.dist}`,
     // Globals can be used directly in template files
     globals: TEMPLATE_GLOBALS
+  },
+
+  test: {
+    src: [
+      './test/**/*.js'
+    ]
   }
 };
 
@@ -97,7 +111,7 @@ const config = {
 // ------------------------------
 
 const webpackConfig = {
-  devtool: DEBUG ? 'source-map' : false,
+  devtool: DEBUG ? 'sourcemap' : false,
 
   cache: DEBUG,
   debug: DEBUG,
@@ -108,7 +122,7 @@ const webpackConfig = {
   },
 
   entry: {
-    app: ['./src/app']
+    app: [`./${dirs.src}/app`]
   },
 
   output: {
@@ -144,13 +158,13 @@ const webpackConfig = {
         loader: 'file?name=fonts/[name].[ext]'
       }, {
         test: /\.png/,
-        loader: 'url-loader?limit=5120&mimetype=image/png'
+        loader: `url-loader?limit=${BASE64_LIMIT}&mimetype=image/png`
       }, {
         test: /\.jpg/,
-        loader: 'url-loader?limit=5120&mimetype=image/jpg'
+        loader: `url-loader?limit=${BASE64_LIMIT}&mimetype=image/jpg`
       }, {
         test: /\.gif/,
-        loader: 'url-loader?limit=5120&mimetype=image/gif'
+        loader: `url-loader?limit=${BASE64_LIMIT}&mimetype=image/gif`
       }
     ]
   },

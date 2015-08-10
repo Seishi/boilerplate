@@ -1,4 +1,4 @@
-// Livereload
+// Reload browser automatically
 // ------------------------------
 
 import browserSync from 'browser-sync';

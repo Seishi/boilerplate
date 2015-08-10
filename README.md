@@ -27,6 +27,7 @@ npm install
 │       ├── lint.js
 │       ├── markup.js
 │       ├── serve.js
+│       ├── test.js
 │       └── watch.js
 ├── gulpfile.babel.js           // Gulp entrance
 ├── node_modules                // Node modules
@@ -36,13 +37,9 @@ npm install
 └── src                         // Sources
     ├── app.js
     ├── components
-    │   ├── Example
-    │   │   ├── Example.js
-    │   │   └── Example.styl
-    │   └── Loading
-    │       ├── Loading.js
-    │       ├── Loading.styl
-    │       └── spinner.png
+    │   └── TodoList
+    │       ├── Task.js
+    │       └── TaskList.js
     └── views
         ├── _layout.jade
         └── index.jade
@@ -67,7 +64,3 @@ gulp --release
 ```
 
 You can find the results in the `dist` directory.
-
-### TODO
-
-- Add uint test

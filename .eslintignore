@@ -1,10 +1,6 @@
 # Node
 node_modules/
 
-# Istanbul
-coverage/
-
 # Generated files
-dist/
 dist
-public/
+dist/

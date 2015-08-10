@@ -2,7 +2,6 @@
 // ------------------------------
 
 import merge from 'lodash/object/merge';
-import jade from 'gulp-jade';
 import fm from 'front-matter';
 import path from 'path';
 import browserSync from 'browser-sync';
@@ -34,7 +33,7 @@ export default function (gulp, config, $) {
     gulp.src(config.markup.src)
       .pipe($.plumber())
       .pipe($.data(getData))
-      .pipe(jade({
+      .pipe($.jade({
         pretty: '  '
       }))
       .pipe(gulp.dest(config.markup.dest))

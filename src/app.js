@@ -1,8 +1,16 @@
-import Example from './components/Example/Example';
+import TaskList from './components/TodoList/TaskList';
 
+import './base.styl';
+
+/* istanbul ignore if*/
 if (module.hot) {
   module.hot.accept();
 }
 
-const example = new Example();
-example.run();
+let taskList = new TaskList();
+
+taskList.add('wash dishes');
+
+if (__DEV__) {
+  console.log(taskList);
+}

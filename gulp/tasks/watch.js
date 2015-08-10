@@ -1,8 +1,6 @@
 // Watch files' changes
 // ------------------------------
 
-// import browserSync from 'browser-sync';
-
 export default function (gulp, config, $) {
   gulp.task('watch', () => {
 
@@ -14,6 +12,10 @@ export default function (gulp, config, $) {
 
     $.watch(config.markup.src, () => {
       gulp.start('markup');
+    });
+
+    $.watch(config.test.src.concat([`./${config.dirs.src}/**/*.js`]), () => {
+      gulp.start('test');
     });
 
   });

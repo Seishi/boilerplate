@@ -6,6 +6,8 @@ html
     if !__DEV__ && stylesheets
       each stylesheet in stylesheets
         link(rel="stylesheet", type="text/css", href="#{current.base}assets/#{stylesheet}.css")
+    if __DEV__
+      link(rel="icon", href="data:;base64,iVBORw0KGgo=")
   body
     block content
 
